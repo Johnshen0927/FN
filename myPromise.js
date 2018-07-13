@@ -1,11 +1,14 @@
 function MyPromise(callback) {
+    // 设置状态
     this.status = "pending";
+    // 用数组分别存放res和rej状态列队需执行的的函数
     this.resultedCbs = []
     this.rejectedCbs = []
 
     let resFn = () => {
         setTimeout(() => {
             if (this.status == "pending") {
+                // 只有当状态为待执行才能触发
                 this.status = "resulted";
                 this.resultedCbs.forEach(cb => {
                     cb()
